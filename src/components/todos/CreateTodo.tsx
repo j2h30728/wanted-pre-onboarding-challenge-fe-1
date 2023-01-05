@@ -13,9 +13,7 @@ const CreateTodo = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      alert("추가되었습니다.");
-    } else if (error instanceof AxiosError) {
+    if (error instanceof AxiosError) {
       alert(error.response?.data.error);
     }
   }, [isSuccess, error]);

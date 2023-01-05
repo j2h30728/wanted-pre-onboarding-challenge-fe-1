@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ITodoProp, useTodo, getTodoByID } from "../../hook/useTodo";
 import { AxiosError } from "axios";
 import TodoForm from "./TodoForm";
+import styled from "styled-components";
 interface IEditProp {
   setEdit: (data: boolean) => void;
 }
@@ -22,7 +23,14 @@ const UpdateTodo = ({ setEdit }: IEditProp) => {
       alert(error.response?.data.error);
     }
   }, [isSuccess, error]);
-
-  return <TodoForm onSubmit={handleFormSubmit} data={todo} />;
+  return (
+    <Container>
+      <TodoForm onSubmit={handleFormSubmit} data={todo} setEdit={setEdit} />
+    </Container>
+  );
 };
 export default UpdateTodo;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

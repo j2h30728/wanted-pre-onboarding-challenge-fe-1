@@ -8,6 +8,6 @@ export const authSchma = yup.object({
     .min(8, "비밀번호는 최소 8자리 이상입니다."),
 });
 export const todoSchma = yup.object({
-  title: yup.string().required("할 일을 입력해주세요."),
+  title: yup.string().required("할 일을 필수 입력입니다."),
   content: yup.string().notRequired(),
 });

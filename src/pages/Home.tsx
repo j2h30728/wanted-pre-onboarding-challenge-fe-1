@@ -1,15 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Home() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "full",
-      }}>
-      Home
-    </div>
-  );
+  return <Container>Home</Container>;
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 4rem;
+`;

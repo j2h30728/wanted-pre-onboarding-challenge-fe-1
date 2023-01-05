@@ -1,11 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import styled from "styled-components";
 
 export default function Auth() {
   return (
-    <div>
-      <h1>Auth</h1>
+    <Container>
+      <h3>Auth</h3>
       <Outlet />
-    </div>
+    </Container>
   );
 }
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

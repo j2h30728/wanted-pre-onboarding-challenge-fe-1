@@ -61,6 +61,7 @@ export function useTodo() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
+      navigate("/todos");
     },
   });
   return { getTodos, createTodo, updateTodo, deleteTodo };

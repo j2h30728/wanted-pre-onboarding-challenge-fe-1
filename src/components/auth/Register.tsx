@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { IAuthProp, useRegister } from "../../hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import styled from "styled-components";
 
 import AuthForm from "./AuthForm";
 
 export default function Register() {
   const { mutate, data: registerData, isSuccess, error } = useRegister();
   const navigate = useNavigate();
-
   const handleSubmitForm = (data: IAuthProp) => {
     mutate(data);
   };
@@ -22,9 +22,18 @@ export default function Register() {
     }
   }, [isSuccess, registerData, error]);
   return (
-    <>
-      <h1>Register</h1>
-      <AuthForm onSubmit={handleSubmitForm} />
-    </>
+    <Container>
+      <Title>Register</Title>
+      <AuthForm onSubmit={handleSubmitForm} buttonName="Register" />
+    </Container>
   );
 }
+const Container = styled.div`
+  border: 2px solid ${prop => prop.theme.color1};
+  border-radius: 10px;
+`;
+
+const Title = styled.h1`
+  padding-top: 20px;
+  text-align: center;
+`;
