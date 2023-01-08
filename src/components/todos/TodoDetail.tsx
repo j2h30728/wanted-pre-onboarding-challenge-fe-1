@@ -1,58 +1,50 @@
 import React, { useState } from "react";
-import { getTodoByID, useTodo } from "../../hook/useTodo";
+import { getTodoByID, useTodo, ITodoProp } from "../../hook/useTodo";
 import UpdateTodo from "./UpdateTodo";
 import styled from "styled-components";
+import { Content } from "../common";
 
-const TodoDetail = () => {
+interface ISetUpdateProp {
+  setUpdate: (data: boolean) => void;
+  update: boolean;
+}
+
+const TodoDetail = ({ update, setUpdate }: ISetUpdateProp) => {
   const { data: todo, isSuccess } = getTodoByID();
   const {
     deleteTodo: { mutate: deleteMutate, isSuccess: isDeleted },
   } = useTodo();
 
-  const [edit, setEdit] = useState(false);
-  const handleCancle = () => {
-    setEdit(!edit);
-  };
-
   const handleDelete = () => {
-    deleteMutate(todo.id);
+    todo && deleteMutate(todo.id);
   };
 
-  return !edit && isSuccess ? (
-    <CreateContainer>
+  return isSuccess ? (
+    <Container>
       <Title>{todo.title}</Title>
-      <p>{todo.content}</p>
+      <Content content={todo.content} />
       <ButtonContainer>
-        <button onClick={() => setEdit(!edit)}>수정</button>
+        <button onClick={() => setUpdate(!update)}>수정</button>
         <button onClick={handleDelete}>삭제</button>
       </ButtonContainer>
-    </CreateContainer>
-  ) : edit ? (
-    <EditContainer>
-      <UpdateTodo setEdit={setEdit} />
-    </EditContainer>
-  ) : (
-    <></>
-  );
+    </Container>
+  ) : null;
 };
 export default TodoDetail;
-const CreateContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-self: start;
-  padding: 90px 0 0 60px;
+  padding: 30px 30px 0 10%;
 `;
 const Title = styled.h2`
   padding-top: 20px;
   justify-content: center;
 `;
-const EditContainer = styled.div`
+const UpdateContainer = styled.div`
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-`;
-const CancleBtn = styled.button`
-  width: 290px;
 `;
 const ButtonContainer = styled.div`
   display: flex;

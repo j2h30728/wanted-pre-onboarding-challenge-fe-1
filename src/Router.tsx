@@ -7,7 +7,7 @@ import Auth from "./pages/Auth";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Todos from "./pages/Todos";
-import TodoDetail from "./components/todos/TodoDetail";
+import Todo from "./pages/Todo";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":id",
-            element: <TodoDetail />,
+            element: <Todo />,
           },
         ],
       },

@@ -1,17 +1,12 @@
 import { api } from "../uti/api";
-import {
-  useQueries,
-  useMutation,
-  useQueryClient,
-  useQuery,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export interface ITodoProp {
   title: string;
   content: string;
-  id?: string;
+  id: string;
 }
 
 export function useTodo() {
@@ -56,7 +51,6 @@ export function useTodo() {
 
   const deleteTodo = useMutation({
     mutationFn: async (id: string) => {
-      console.log("id", id);
       return await api.delete(`/todos/${id}`).then(res => res.data);
     },
     onSuccess: () => {
@@ -69,8 +63,7 @@ export function useTodo() {
 
 export const getTodoByID = () => {
   const { id } = useParams();
-  console.log("확인", id);
-  return useQuery({
+  return useQuery<ITodoProp>({
     queryKey: ["todos", id],
     queryFn: async () => {
       return await api

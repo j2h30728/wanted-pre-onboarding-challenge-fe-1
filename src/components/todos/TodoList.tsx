@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { ITodoProp, useTodo } from "../../hook/useTodo";
 import styled from "styled-components";
+import { ContainerTitle, Content } from "../common";
 
 const TodoList = () => {
   const navigate = useNavigate();
@@ -28,12 +29,13 @@ const TodoList = () => {
 
   return (
     <Container>
+      <ContainerTitle to="/todos" title="Todos"></ContainerTitle>
       {todoList && todoList.length > 0 ? (
-        todoList.map((todo: ITodoProp, idx: number) => (
+        todoList.map((todo: ITodoProp) => (
           <Todo key={todo.id}>
             <Title to={`/todos/${todo.id}`}>
               {todo.title}
-              <Content>{todo.content}</Content>
+              <Content content={todo.content}></Content>
             </Title>
             <DeleteBtn
               onClick={() => {
@@ -52,7 +54,7 @@ const TodoList = () => {
 export default TodoList;
 
 const Container = styled.ul`
-  margin: 30px;
+  margin: 0 30px;
   padding: 0;
 `;
 const Todo = styled.li`
@@ -66,9 +68,6 @@ const Title = styled(Link)`
   text-decoration: none;
   font-size: 25px;
   color: ${prop => prop.theme.textColor};
-`;
-const Content = styled.p`
-  font-size: 15px;
 `;
 const DeleteBtn = styled.button`
   width: 100px;
