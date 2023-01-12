@@ -5,7 +5,6 @@ import styled from "styled-components";
 export default function Auth() {
   return (
     <Container>
-      <h3>Auth</h3>
       <Outlet />
     </Container>
   );

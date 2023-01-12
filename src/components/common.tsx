@@ -19,7 +19,7 @@ const Title = styled(Link)`
   text-decoration: none;
   color: ${prop => prop.theme.textDarkColor};
   font-size: 40px;
-  cusor: pointer;
+  cursor: pointer;
 `;
 
 interface IContent {

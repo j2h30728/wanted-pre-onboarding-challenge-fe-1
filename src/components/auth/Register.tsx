@@ -11,18 +11,10 @@ export default function Register() {
   };
 
   return (
-    <Container>
-      <Title>Register</Title>
-      <AuthForm onSubmit={handleSubmitForm} buttonName="Register" />
-    </Container>
+    <AuthForm
+      title="Register"
+      onSubmit={handleSubmitForm}
+      buttonName="Submit"
+    />
   );
 }
-const Container = styled.div`
-  border: 2px solid ${prop => prop.theme.color1};
-  border-radius: 10px;
-`;
-
-const Title = styled.h1`
-  padding-top: 20px;
-  text-align: center;
-`;

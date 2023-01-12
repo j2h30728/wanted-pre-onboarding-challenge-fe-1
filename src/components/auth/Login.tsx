@@ -13,18 +13,6 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <Title>Login</Title>
-      <AuthForm onSubmit={handleSubmitForm} buttonName="Log in" />
-    </Container>
+    <AuthForm title="Login" onSubmit={handleSubmitForm} buttonName="Submit" />
   );
 }
-
-const Container = styled.div`
-  border: 2px solid ${prop => prop.theme.color1};
-  border-radius: 10px;
-`;
-const Title = styled.h1`
-  padding-top: 20px;
-  text-align: center;
-`;
