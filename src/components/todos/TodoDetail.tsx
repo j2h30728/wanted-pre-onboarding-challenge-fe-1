@@ -1,51 +1,52 @@
-import React, { useState } from "react";
-import { getTodoByID, useTodo, ITodoProp } from "../../queries/useTodo";
-import UpdateTodo from "./UpdateTodo";
+import React from "react";
+import { getTodoByID, useTodo } from "../../queries/useTodo";
 import styled from "styled-components";
-import { Content } from "../common";
+import { Content, Button } from "../common/common";
+import { IUpdateTodoModalProp } from "../type/todos";
 
-interface ISetUpdateProp {
-  setUpdate: (data: boolean) => void;
-  update: boolean;
-}
-
-const TodoDetail = ({ update, setUpdate }: ISetUpdateProp) => {
+const TodoDetail = ({ handleModalOpen }: IUpdateTodoModalProp) => {
   const { data: todo, isSuccess } = getTodoByID();
   const {
-    deleteTodo: { mutate: deleteMutate, isSuccess: isDeleted },
+    deleteTodo: { mutate: deleteMutate },
   } = useTodo();
 
   const handleDelete = () => {
-    todo && deleteMutate(todo.id);
+    const isConfirm = confirm("삭제하시겠습니까?");
+    isConfirm && todo && deleteMutate(todo.id);
   };
-
   return isSuccess ? (
     <Container>
       <Title>{todo.title}</Title>
       <Content content={todo.content} />
       <ButtonContainer>
-        <button onClick={() => setUpdate(!update)}>수정</button>
-        <button onClick={handleDelete}>삭제</button>
+        <Button btnName="Update" onClick={() => handleModalOpen()} />
+        <Button btnName="Delete" onClick={handleDelete} />
       </ButtonContainer>
     </Container>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 export default TodoDetail;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: start;
-  padding: 30px 30px 0 10%;
+  align-self: center;
+  width: 80%;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid ${props => props.theme.color1};
+  border-radius: 10px;
 `;
 const Title = styled.h2`
-  padding-top: 20px;
+  font-size: 30px;
+  padding: 20px 0;
+  margin-bottom: 10px;
   justify-content: center;
+  border-bottom: 1px solid ${props => props.theme.color1};
 `;
-const UpdateContainer = styled.div`
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-`;
+
 const ButtonContainer = styled.div`
   display: flex;
+  justify-content: end;
 `;

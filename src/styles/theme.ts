@@ -6,4 +6,5 @@ export const theme: DefaultTheme = {
   color1: "#cfdbd5",
   color2: "#e8eddf",
   pointColor: "#f5cb5c",
+  alertColor: "#ff7675",
 };

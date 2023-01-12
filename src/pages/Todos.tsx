@@ -1,16 +1,15 @@
 import React from "react";
 import TodoList from "../components/todos/TodoList";
 import CreateTodo from "../components/todos/CreateTodo";
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import Todo from "./Todo";
 
 export default function Todos() {
   return (
     <Container>
-      <List>
+      <TodosWrapper>
         <TodoList />
-      </List>
+      </TodosWrapper>
       <CreateAndEdit>
         <CreateTodo />
         <Outlet />
@@ -21,15 +20,15 @@ export default function Todos() {
 const Container = styled.div`
   display: flex;
 `;
-const List = styled.div`
+const TodosWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 40%;
 `;
 
 const CreateAndEdit = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 60%;
 `;

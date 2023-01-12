@@ -1,26 +1,30 @@
 import React, { useEffect } from "react";
-import { ITodoProp, useTodo, getTodoByID } from "../../queries/useTodo";
-import { AxiosError } from "axios";
-import TodoForm, { IFromProp } from "./TodoForm";
+import { useTodo, getTodoByID } from "../../queries/useTodo";
+import TodoForm from "./TodoForm";
+import Modal from "../common/Modal";
+import { ITodoProp, IUpdateTodoModalProp } from "../type/todos";
 
-const UpdateTodo = ({ setUpdate }: IFromProp) => {
-  const { data: todo } = getTodoByID();
+const UpdateTodo = ({ handleModalOpen, isModalOpen }: IUpdateTodoModalProp) => {
+  const { data: oldData } = getTodoByID();
   const { updateTodo } = useTodo();
-  const { mutate, isSuccess, error } = updateTodo();
-  const handleFormSubmit = (data: ITodoProp) => {
-    mutate(data);
+  const { mutate } = updateTodo();
+
+  const handleFormSubmit = (UpdateTodo: ITodoProp) => {
+    mutate(UpdateTodo);
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      alert("수정되었습니다.");
-      setUpdate && setUpdate(false);
-    } else if (error instanceof AxiosError) {
-      alert(error.response?.data.error);
-    }
-  }, [isSuccess, error]);
   return (
-    <TodoForm onSubmit={handleFormSubmit} data={todo} setUpdate={setUpdate} />
+    <>
+      {isModalOpen && (
+        <Modal onClickToggleModal={() => handleModalOpen()}>
+          <TodoForm
+            onSubmit={handleFormSubmit}
+            oldData={oldData}
+            handleModalOpen={handleModalOpen}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 export default UpdateTodo;

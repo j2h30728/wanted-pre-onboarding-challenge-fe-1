@@ -9,5 +9,6 @@ declare module "styled-components" {
     color1: string;
     color2: string;
     pointColor: string;
+    alertColor: string;
   }
 }

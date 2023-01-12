@@ -7,6 +7,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Todos from "./pages/Todos";
 import Todo from "./pages/Todo";
+import DefaultTodoDetail from "./components/todos/DefaultTodoDetail";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: "todos",
         element: <Todos />,
         children: [
+          {
+            path: "",
+            element: <DefaultTodoDetail />,
+          },
           {
             path: ":id",
             element: <Todo />,

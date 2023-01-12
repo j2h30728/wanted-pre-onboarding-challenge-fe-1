@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import AuthForm from "./AuthForm";
-import styled from "styled-components";
 import { IAuthProp } from "../type/auth";
 import { useLogin } from "../../queries/useAuth";
 
@@ -13,6 +11,6 @@ export default function Login() {
   };
 
   return (
-    <AuthForm title="Login" onSubmit={handleSubmitForm} buttonName="Submit" />
+    <AuthForm title="로그인" onSubmit={handleSubmitForm} buttonName="확인" />
   );
 }

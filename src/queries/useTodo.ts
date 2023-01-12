@@ -1,17 +1,11 @@
 import { api } from "../lib/api";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
-export interface ITodoProp {
-  title: string;
-  content: string;
-  id: string;
-}
+import { AxiosError } from "axios";
+import { ITodoProp } from "../components/type/todos";
 
 export function useTodo() {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const getTodos = useQuery({
     queryKey: ["todos"],
@@ -32,7 +26,12 @@ export function useTodo() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      navigate("/todos");
+      window.location.href = "/todos";
+    },
+    onError: error => {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.error);
+      }
     },
   });
 
@@ -44,7 +43,12 @@ export function useTodo() {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
-        navigate(`/todos/${id}`);
+        window.location.href = `/todos/${id}`;
+      },
+      onError: error => {
+        if (error instanceof AxiosError) {
+          alert(error.response?.data.error);
+        }
       },
     });
   };
@@ -55,7 +59,12 @@ export function useTodo() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      navigate("/todos");
+      window.location.href = "/todos";
+    },
+    onError: error => {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.error);
+      }
     },
   });
   return { getTodos, createTodo, updateTodo, deleteTodo };

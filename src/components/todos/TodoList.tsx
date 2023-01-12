@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { ITodoProp, useTodo } from "../../queries/useTodo";
+import { useTodo } from "../../queries/useTodo";
 import styled from "styled-components";
-import { ContainerTitle, Content } from "../common";
+import { ContainerTitle } from "../common/common";
+import { ITodoProp } from "../type/todos";
 
 const TodoList = () => {
   const navigate = useNavigate();
@@ -29,47 +30,44 @@ const TodoList = () => {
 
   return (
     <Container>
-      <ContainerTitle to="/todos" title="Todos"></ContainerTitle>
-      {todoList && todoList.length > 0 ? (
-        todoList.map((todo: ITodoProp) => (
-          <Todo key={todo.id}>
-            <Title to={`/todos/${todo.id}`}>
-              {todo.title}
-              <Content content={todo.content}></Content>
-            </Title>
-            <DeleteBtn
-              onClick={() => {
-                todo.id && setSelected(todo.id);
-              }}>
-              삭제
-            </DeleteBtn>
-          </Todo>
-        ))
-      ) : (
-        <p>추가해주세요</p>
-      )}
+      <ContainerTitle title="Todo List"></ContainerTitle>
+      <TodosWrapper>
+        {todoList && todoList.length > 0 ? (
+          todoList.map((todo: ITodoProp) => (
+            <Todo key={todo.id}>
+              <Title to={`/todos/${todo.id}`}>{todo.title}</Title>
+            </Todo>
+          ))
+        ) : (
+          <p>추가해주세요</p>
+        )}
+      </TodosWrapper>
     </Container>
   );
 };
 export default TodoList;
-
-const Container = styled.ul`
-  margin: 0 30px;
-  padding: 0;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const TodosWrapper = styled.ul`
+  margin: 30px;
+  width: 80%;
+  align-self: flex-start;
 `;
 const Todo = styled.li`
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  padding: 20px 0;
-  border-bottom: 2px solid ${prop => prop.theme.color1};
+  width: 100%;
+  padding: 10px 0;
+  margin: 20px;
+  border-bottom: 1px dashed ${prop => prop.theme.color1};
 `;
 const Title = styled(Link)`
   text-decoration: none;
   font-size: 25px;
   color: ${prop => prop.theme.textColor};
-`;
-const DeleteBtn = styled.button`
-  width: 100px;
-  align-self: end;
 `;

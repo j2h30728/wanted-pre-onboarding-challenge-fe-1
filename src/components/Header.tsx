@@ -8,27 +8,28 @@ export default function Header() {
 
   const handleLogin = () => {
     if (hasToken) {
-      confirm("로그아웃 하시겠습니까?");
-      useLogout();
+      const isConfirm = confirm("로그아웃 하시겠습니까?");
+      isConfirm && useLogout();
+    } else {
+      window.location.href = "/auth/login";
     }
-    window.location.href = "/auth/login";
   };
   return (
     <Head>
       <li>
-        <a onClick={handleLogin}>{hasToken ? "LogOut" : "Login"}</a>
+        <a onClick={handleLogin}>{hasToken ? "로그아웃" : "로그인"}</a>
       </li>
       <HomeLink>
         <Link to="/">Home</Link>
       </HomeLink>
       {!hasToken && (
         <li>
-          <Link to="auth/register">Register</Link>
+          <Link to="auth/register">회원가입</Link>
         </li>
       )}
       {hasToken && (
         <li>
-          <Link to="todos">Todos</Link>
+          <Link to="todos">할 일 목록</Link>
         </li>
       )}
     </Head>
