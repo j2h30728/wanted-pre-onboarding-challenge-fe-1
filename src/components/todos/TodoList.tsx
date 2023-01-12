@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { ITodoProp, useTodo } from "../../hook/useTodo";
+import { ITodoProp, useTodo } from "../../queries/useTodo";
 import styled from "styled-components";
 import { ContainerTitle, Content } from "../common";
 

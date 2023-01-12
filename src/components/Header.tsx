@@ -1,34 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useLogout } from "../hook/auth";
+import token from "../lib/token";
 
 export default function Header() {
-  const navigate = useNavigate();
-
-  const token = window.localStorage.getItem("token");
+  const hasToken = token.getToken("token");
 
   const handleLogin = () => {
-    if (token) {
+    if (hasToken) {
       confirm("로그아웃 하시겠습니까?");
-      window.localStorage.removeItem("token");
-      navigate("/");
-    } else {
-      navigate("/auth/login");
+      useLogout();
     }
+    window.location.href = "/auth/login";
   };
   return (
     <Head>
       <li>
-        <a onClick={handleLogin}>{token ? "LogOut" : "Login"}</a>
+        <a onClick={handleLogin}>{hasToken ? "LogOut" : "Login"}</a>
       </li>
       <HomeLink>
         <Link to="/">Home</Link>
       </HomeLink>
-      {!token && (
+      {!hasToken && (
         <li>
           <Link to="auth/register">Register</Link>
         </li>
       )}
-      {token && (
+      {hasToken && (
         <li>
           <Link to="todos">Todos</Link>
         </li>

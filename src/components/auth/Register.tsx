@@ -1,26 +1,15 @@
-import React, { useEffect } from "react";
-import { IAuthProp, useRegister } from "../../hook/useAuth";
-import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
+import React from "react";
 import styled from "styled-components";
-
 import AuthForm from "./AuthForm";
+import { IAuthProp } from "../type/auth";
+import { useRegister } from "../../queries/useAuth";
 
 export default function Register() {
-  const { mutate, data: registerData, isSuccess, error } = useRegister();
-  const navigate = useNavigate();
-  const handleSubmitForm = (data: IAuthProp) => {
-    mutate(data);
+  const { mutate: registerMutate } = useRegister();
+  const handleSubmitForm = (regitsterData: IAuthProp) => {
+    registerMutate(regitsterData);
   };
 
-  useEffect(() => {
-    if (isSuccess && registerData) {
-      alert(registerData.message);
-      navigate("/");
-    } else if (error instanceof AxiosError) {
-      alert(error.response?.data.error);
-    }
-  }, [isSuccess, registerData, error]);
   return (
     <Container>
       <Title>Register</Title>

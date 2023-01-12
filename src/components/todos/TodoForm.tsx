@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { ITodoProp, useTodo } from "../../hook/useTodo";
+import { ITodoProp, useTodo } from "../../queries/useTodo";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { todoSchma } from "../../uti/yup";
+import { todoSchma } from "../../util/yup";
 import styled from "styled-components";
 import { ContainerTitle } from "../common";
 

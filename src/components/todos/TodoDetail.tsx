@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getTodoByID, useTodo, ITodoProp } from "../../hook/useTodo";
+import { getTodoByID, useTodo, ITodoProp } from "../../queries/useTodo";
 import UpdateTodo from "./UpdateTodo";
 import styled from "styled-components";
 import { Content } from "../common";

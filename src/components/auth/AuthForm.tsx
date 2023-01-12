@@ -1,10 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { IAuthProp } from "../../hook/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { authSchma } from "../../uti/yup";
 import styled from "styled-components";
-
+import { authSchma } from "../../util/yup";
+import { IAuthProp } from "../type/auth";
 interface form {
   onSubmit: (data: IAuthProp) => void;
   buttonName: string;
@@ -46,7 +45,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 300px;
-  padding 30px;
+  padding: 30px;
 `;
 const InputContainer = styled.div``;
 const Label = styled.label`

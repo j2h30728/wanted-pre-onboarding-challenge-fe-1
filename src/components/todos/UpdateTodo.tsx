@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ITodoProp, useTodo, getTodoByID } from "../../hook/useTodo";
+import { ITodoProp, useTodo, getTodoByID } from "../../queries/useTodo";
 import { AxiosError } from "axios";
 import TodoForm, { IFromProp } from "./TodoForm";
 
